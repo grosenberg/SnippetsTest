@@ -1,4 +1,4 @@
-/* Copyright © 2015 Gerald Rosenberg.
+/* Copyright ï¿½ 2015 Gerald Rosenberg.
  * Use of this source code is governed by a BSD-style
  * license that can be found in the License.md file.
  */
@@ -32,8 +32,8 @@ public class TestUtils {
 	private TestUtils() {}
 
 	/**
-	 * Returns file content as string, reading from a path. Throws runtime exception in case of FileNotFoundException or
-	 * IOException.
+	 * Returns file content as string, reading from a path. Throws runtime exception in case of
+	 * FileNotFoundException or IOException.
 	 * 
 	 * @param filename
 	 * @return the given file content
@@ -56,8 +56,8 @@ public class TestUtils {
 	}
 
 	/**
-	 * Returns file content as string, reading from a url. Throws runtime exception in case of FileNotFoundException or
-	 * IOException.
+	 * Returns file content as string, reading from a url. Throws runtime exception in case of
+	 * FileNotFoundException or IOException.
 	 * 
 	 * @param fileurl the url of the file to read.
 	 * @return file content as string.
@@ -74,9 +74,8 @@ public class TestUtils {
 	}
 
 	/**
-	 * Writes a string to the specified file using the default encoding.
-	 * 
-	 * If the file path doesn't exist, it's created. If the file exists, it is overwritten.
+	 * Writes a string to the specified file using the default encoding. If the file path doesn't
+	 * exist, it's created. If the file exists, it is overwritten.
 	 * 
 	 * @param pathname the path to the file.
 	 * @param data the string to write.
@@ -190,8 +189,8 @@ public class TestUtils {
 	}
 
 	/**
-	 * Walks file tree returning list of files found with matching file extents that exist within the given depth offset
-	 * from the starting directory and that are accessible.
+	 * Walks file tree returning list of files found with matching file extents that exist within
+	 * the given depth offset from the starting directory and that are accessible.
 	 * 
 	 * @param f starting directory
 	 * @param exts list (array) of acceptable extents
@@ -233,11 +232,10 @@ public class TestUtils {
 		@Override
 		public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
 			File f = dir.toFile();
-			if (pathDepth(f) <= depth) {
-				return FileVisitResult.CONTINUE;
-			} else {
-				return FileVisitResult.SKIP_SIBLINGS;
+			if (pathDepth(f) > depth) {
+				return FileVisitResult.SKIP_SUBTREE;
 			}
+			return FileVisitResult.CONTINUE;
 		}
 
 		@Override

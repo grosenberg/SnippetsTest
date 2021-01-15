@@ -10,25 +10,14 @@ import java.util.List;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import net.certiv.remark.Converter;
-import net.certiv.remark.IOProcessor;
-import net.certiv.remark.PhaseState;
-import net.certiv.remark.RemarkContext;
-import net.certiv.remark.RemarkLexer;
-import net.certiv.remark.RemarkParser;
-import net.certiv.remark.RemarkPhase01;
-import net.certiv.remark.RemarkPhase02;
-import net.certiv.remark.RemarkPhase03;
-import net.certiv.remark.RemarkPhase04;
-import net.certiv.remark.RemarkTokenFactory;
 
 public class SnippetsTest extends TestBase {
 
@@ -67,30 +56,31 @@ public class SnippetsTest extends TestBase {
 	/**
 	 * Create a token stream using the test target specific lexer.
 	 * 
-	 * @param is
-	 *        a snippet derived input stream
+	 * @param is a snippet derived input stream
 	 * @return a lexer derived token stream
 	 */
 	@Override
 	public CommonTokenStream createLexerStream(ANTLRInputStream is) {
 		// TODO: customization required - see 'Use' instructions.
-		RemarkLexer lexer = new RemarkLexer(is);
-		lexer.setTokenFactory(new RemarkTokenFactory());
+		Lexer lexer = null;
+		// lexer = new RemarkLexer(is);
+		// lexer.setTokenFactory(new RemarkTokenFactory());
 		return new CommonTokenStream(lexer);
 	}
 
 	/**
 	 * Create a parse-tree using the test target specific parser.
 	 * 
-	 * @param tokens
-	 *        a lexer derived token stream
+	 * @param tokens a lexer derived token stream
 	 * @return a parse-tree
 	 */
 	@Override
 	public ParseTree createParseTree(CommonTokenStream tokens) {
 		// TODO: customization required - see 'Use' instructions.
-		RemarkParser parser = new RemarkParser(tokens);
-		RemarkContext tree = parser.remark(); // invoke main rule
+		Parser parser = null;
+		ParseTree tree = null;
+		// parser = new RemarkParser(tokens);
+		// tree = parser.remark(); // invoke main rule
 
 		// required - annotate the parse-tree with its recognizer - required
 		annotations.put(tree, parser);
@@ -101,20 +91,21 @@ public class SnippetsTest extends TestBase {
 	 * Create a result string using the test target specific parse-tree and any applicable
 	 * tree-walkers.
 	 * 
-	 * @param tree
-	 *        a test target specific parser derived parse-tree
+	 * @param tree a test target specific parser derived parse-tree
 	 * @return a result string
 	 */
 	@Override
 	public String createResults(ParseTree tree) {
 		// TODO: customization required - see 'Use' instructions.
-		ParseTreeWalker walker = new ParseTreeWalker();
-		Converter conv = new Converter(new IOProcessor(new String[] { "-s" }));
-		RemarkPhase01 phase01 = conv.processPhase01(tree, walker, new PhaseState());
-		RemarkPhase02 phase02 = conv.processPhase02(tree, walker, phase01);
-		RemarkPhase03 phase03 = conv.processPhase03(tree, walker, phase02);
-		RemarkPhase04 phase04 = conv.processPhase04(tree, walker, phase03);
-		return phase04.toString();
+		String results = "";
+		// ParseTreeWalker walker = new ParseTreeWalker();
+		// Converter conv = new Converter(new IOProcessor(new String[] { "-s" }));
+		// RemarkPhase01 phase01 = conv.processPhase01(tree, walker, new PhaseState());
+		// RemarkPhase02 phase02 = conv.processPhase02(tree, walker, phase01);
+		// RemarkPhase03 phase03 = conv.processPhase03(tree, walker, phase02);
+		// RemarkPhase04 phase04 = conv.processPhase04(tree, walker, phase03);
+		// results = phase04.toString()
+		return results;
 	}
 
 	// ------------------------------------------------------------------------
